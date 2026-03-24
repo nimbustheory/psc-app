@@ -1508,62 +1508,114 @@ export default function App() {
   // ——— CONSUMER LAYOUT ———
   return (
     <AppContext.Provider value={{ page, setPage, classRegistrations, registerForClass, prCelebrations, celebratePR }}>
-      <div style={{ height: "100vh", display: "flex", flexDirection: "column", fontFamily: "'DM Sans', system-ui, sans-serif", background: T.bgDim, overflow: "hidden" }}>
-        {/* Top Header Bar — fixed */}
-        <header style={{ flexShrink: 0, zIndex: 30, background: T.bg, color: "#fff", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 56 }}>
-          <button onClick={handleLogoClick} style={{ display: "flex", alignItems: "center", gap: 8, background: "none", border: "none", cursor: "pointer", color: "#fff" }}>
-            {GYM_CONFIG.logoImage ? <img src={GYM_CONFIG.logoImage} alt={GYM_CONFIG.name} style={{ height: 28, objectFit: "contain" }} onError={e => { e.target.style.display = "none"; e.target.nextElementSibling.style.display = "flex"; }} /> : null}
-            <div style={{ width: 38, height: 38, borderRadius: 8, background: T.accent, display: GYM_CONFIG.logoImage ? "none" : "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Bebas Neue', sans-serif", fontSize: 14, color: "#fff" }}>{GYM_CONFIG.logoMark}</div>
-          </button>
-          {/* Right Actions */}
-          <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
-            {showAdminToggle && <button onClick={() => { setIsAdmin(true); setPage("admin-dashboard"); }} style={{ padding: 8, borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: T.accent }}><Shield size={20} /></button>}
-            <button onClick={() => setShowNotifications(true)} style={{ padding: 8, borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: "#fff", position: "relative" }}>
-              <Bell size={20} />
-              {unreadCount > 0 && <span style={{ position: "absolute", top: 4, right: 4, width: 14, height: 14, borderRadius: "50%", background: T.accent, fontSize: 9, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}>{unreadCount}</span>}
-            </button>
-            <button onClick={() => setShowSettings(true)} style={{ padding: 8, borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: "#fff" }}><Settings size={20} /></button>
+      <div style={{ position: "fixed", inset: 0, fontFamily: "'DM Sans', system-ui, sans-serif", background: "#fafafa", display: "flex", justifyContent: "center", alignItems: "center", overflow: "hidden" }}>
+
+        {/* ——— LEFT PANEL ——— */}
+        <div className="demo-side-panel" style={{ width: 280, flexShrink: 0, paddingRight: 40, display: "flex", flexDirection: "column", justifyContent: "center", alignSelf: "center" }}>
+          <div style={{ marginBottom: 32 }}>
+            {GYM_CONFIG.logoImage && <img src={GYM_CONFIG.logoImage} alt={GYM_CONFIG.name} style={{ height: 48, objectFit: "contain", marginBottom: 16 }} />}
+            <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, color: T.bg, lineHeight: 1.1, marginBottom: 8 }}>{GYM_CONFIG.subtitle}</h1>
+            <p style={{ fontSize: 14, color: "#71717a", lineHeight: 1.5 }}>{GYM_CONFIG.description}</p>
           </div>
-        </header>
-        {/* Click-away for More dropdown */}
-        {showMore && <div onClick={() => setShowMore(false)} style={{ position: "fixed", inset: 0, zIndex: 29 }} />}
-        {/* Scrollable Main Content */}
-        <main style={{ flex: 1, overflowY: "auto", WebkitOverflowScrolling: "touch" }}>
-          <div style={{ maxWidth: 640, margin: "0 auto", padding: "0 0 24px" }}>{renderPage()}</div>
-        </main>
-        {/* Bottom Navigation — fixed */}
-        <nav style={{ flexShrink: 0, zIndex: 30, background: T.bg, borderTop: `1px solid rgba(255,255,255,0.1)`, display: "flex", alignItems: "center", justifyContent: "space-around", height: 60, padding: "0 8px", position: "relative" }}>
-          {mainTabs.map(tab => {
-            const active = tab.id === "more" ? (isMoreActive || showMore) : page === tab.id;
-            if (tab.id === "more") {
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: T.accentGhost, display: "flex", alignItems: "center", justifyContent: "center" }}><Dumbbell size={16} style={{ color: T.accent }} /></div>
+              <span style={{ fontSize: 13, color: "#52525b" }}>Functional Fitness Classes</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: T.accentGhost, display: "flex", alignItems: "center", justifyContent: "center" }}><Users size={16} style={{ color: T.accent }} /></div>
+              <span style={{ fontSize: 13, color: "#52525b" }}>Community Driven</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: T.accentGhost, display: "flex", alignItems: "center", justifyContent: "center" }}><Trophy size={16} style={{ color: T.accent }} /></div>
+              <span style={{ fontSize: 13, color: "#52525b" }}>Track PRs & Compete</span>
+            </div>
+          </div>
+        </div>
+
+        {/* ——— CENTER: Phone Mockup ——— */}
+        <div style={{ width: 390, height: "min(92vh, 844px)", flexShrink: 0, position: "relative", display: "flex", flexDirection: "column", borderRadius: 32, overflow: "hidden", boxShadow: "0 20px 60px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.06)", background: T.bgDim }}>
+          {/* Top Header Bar — fixed */}
+          <header style={{ flexShrink: 0, zIndex: 30, background: T.bg, color: "#fff", padding: "0 18px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 56 }}>
+            <button onClick={handleLogoClick} style={{ display: "flex", alignItems: "center", gap: 8, background: "none", border: "none", cursor: "pointer", color: "#fff" }}>
+              {GYM_CONFIG.logoImage ? <img src={GYM_CONFIG.logoImage} alt={GYM_CONFIG.name} style={{ height: 28, objectFit: "contain" }} onError={e => { e.target.style.display = "none"; e.target.nextElementSibling.style.display = "flex"; }} /> : null}
+              <div style={{ width: 38, height: 38, borderRadius: 8, background: T.accent, display: GYM_CONFIG.logoImage ? "none" : "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Bebas Neue', sans-serif", fontSize: 14, color: "#fff" }}>{GYM_CONFIG.logoMark}</div>
+            </button>
+            {/* Right Actions */}
+            <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
+              {showAdminToggle && <button onClick={() => { setIsAdmin(true); setPage("admin-dashboard"); }} style={{ padding: 8, borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: T.accent }}><Shield size={20} /></button>}
+              <button onClick={() => setShowNotifications(true)} style={{ padding: 8, borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: "#fff", position: "relative" }}>
+                <Bell size={20} />
+                {unreadCount > 0 && <span style={{ position: "absolute", top: 4, right: 4, width: 14, height: 14, borderRadius: "50%", background: T.accent, fontSize: 9, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff" }}>{unreadCount}</span>}
+              </button>
+              <button onClick={() => setShowSettings(true)} style={{ padding: 8, borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: "#fff" }}><Settings size={20} /></button>
+            </div>
+          </header>
+          {/* Click-away for More dropdown */}
+          {showMore && <div onClick={() => setShowMore(false)} style={{ position: "absolute", inset: 0, zIndex: 29 }} />}
+          {/* Scrollable Main Content */}
+          <main style={{ flex: 1, overflowY: "auto", overflowX: "hidden", WebkitOverflowScrolling: "touch" }}>
+            {renderPage()}
+          </main>
+          {/* Bottom Navigation — fixed */}
+          <nav style={{ flexShrink: 0, zIndex: 30, background: T.bg, borderTop: "1px solid rgba(255,255,255,0.1)", display: "flex", alignItems: "center", justifyContent: "space-around", height: 60, padding: "0 8px", position: "relative" }}>
+            {mainTabs.map(tab => {
+              const active = tab.id === "more" ? (isMoreActive || showMore) : page === tab.id;
+              if (tab.id === "more") {
+                return (
+                  <button key={tab.id} onClick={() => setShowMore(!showMore)} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, padding: "6px 12px", borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: active ? "#fff" : "rgba(255,255,255,0.45)" }}>
+                    <tab.icon size={22} strokeWidth={active ? 2.5 : 2} /><span style={{ fontSize: 11, fontWeight: active ? 700 : 500 }}>{tab.label}</span>
+                  </button>
+                );
+              }
               return (
-                <button key={tab.id} onClick={() => setShowMore(!showMore)} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, padding: "6px 12px", borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: active ? "#fff" : "rgba(255,255,255,0.45)" }}>
+                <button key={tab.id} onClick={() => setPage(tab.id)} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, padding: "6px 12px", borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: active ? "#fff" : "rgba(255,255,255,0.45)" }}>
                   <tab.icon size={22} strokeWidth={active ? 2.5 : 2} /><span style={{ fontSize: 11, fontWeight: active ? 700 : 500 }}>{tab.label}</span>
                 </button>
               );
-            }
-            return (
-              <button key={tab.id} onClick={() => setPage(tab.id)} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3, padding: "6px 12px", borderRadius: 8, border: "none", background: "transparent", cursor: "pointer", color: active ? "#fff" : "rgba(255,255,255,0.45)" }}>
-                <tab.icon size={22} strokeWidth={active ? 2.5 : 2} /><span style={{ fontSize: 11, fontWeight: active ? 700 : 500 }}>{tab.label}</span>
-              </button>
-            );
-          })}
-          {/* More dropdown — positioned above bottom nav */}
-          {showMore && (
-            <div style={{ position: "absolute", bottom: 64, left: "50%", transform: "translateX(-50%)", background: "#fff", borderRadius: 12, padding: "10px 8px", boxShadow: "0 8px 32px rgba(0,0,0,.15)", zIndex: 50, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, width: 280 }}>
-              {moreItems.map(item => {
-                const active = page === item.id;
-                return (
-                  <button key={item.id} onClick={() => { setPage(item.id); setShowMore(false); }} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "14px 8px", borderRadius: 10, border: "none", cursor: "pointer", background: active ? T.accentGhost : T.bgDim, color: active ? T.accent : T.textMuted }}>
-                    <item.icon size={20} /><span style={{ fontSize: 13, fontWeight: 600 }}>{item.label}</span>
-                  </button>
-                );
-              })}
+            })}
+            {/* More dropdown — positioned above bottom nav */}
+            {showMore && (
+              <div style={{ position: "absolute", bottom: 64, left: "50%", transform: "translateX(-50%)", background: "#fff", borderRadius: 12, padding: "10px 8px", boxShadow: "0 8px 32px rgba(0,0,0,.15)", zIndex: 50, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, width: 280 }}>
+                {moreItems.map(item => {
+                  const active = page === item.id;
+                  return (
+                    <button key={item.id} onClick={() => { setPage(item.id); setShowMore(false); }} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, padding: "14px 8px", borderRadius: 10, border: "none", cursor: "pointer", background: active ? T.accentGhost : T.bgDim, color: active ? T.accent : T.textMuted }}>
+                      <item.icon size={20} /><span style={{ fontSize: 13, fontWeight: 600 }}>{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </nav>
+          {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
+          {showNotifications && <NotificationsModal onClose={() => setShowNotifications(false)} />}
+        </div>
+
+        {/* ——— RIGHT PANEL ——— */}
+        <div className="demo-side-panel" style={{ width: 280, flexShrink: 0, paddingLeft: 40, display: "flex", flexDirection: "column", justifyContent: "center", alignSelf: "center" }}>
+          <div style={{ background: "#fff", borderRadius: 16, padding: 24, boxShadow: "0 1px 3px rgba(0,0,0,.06)" }}>
+            <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: T.accent, marginBottom: 12 }}>Quick Info</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <div>
+                <p style={{ fontSize: 12, fontWeight: 600, color: "#27272a", marginBottom: 2 }}>Location</p>
+                <p style={{ fontSize: 13, color: "#71717a" }}>{GYM_CONFIG.address.street}</p>
+                <p style={{ fontSize: 13, color: "#71717a" }}>{GYM_CONFIG.address.city}, {GYM_CONFIG.address.state} {GYM_CONFIG.address.zip}</p>
+              </div>
+              <div>
+                <p style={{ fontSize: 12, fontWeight: 600, color: "#27272a", marginBottom: 2 }}>Contact</p>
+                <p style={{ fontSize: 13, color: "#71717a" }}>{GYM_CONFIG.phone}</p>
+                <p style={{ fontSize: 13, color: "#71717a" }}>{GYM_CONFIG.email}</p>
+              </div>
+              <div>
+                <p style={{ fontSize: 12, fontWeight: 600, color: "#27272a", marginBottom: 2 }}>Follow</p>
+                <p style={{ fontSize: 13, color: T.accent }}>{GYM_CONFIG.social.instagram}</p>
+              </div>
             </div>
-          )}
-        </nav>
-        {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
-        {showNotifications && <NotificationsModal onClose={() => setShowNotifications(false)} />}
+          </div>
+          <p style={{ fontSize: 11, color: "#a1a1aa", marginTop: 20, textAlign: "center" }}>Built by Nimbus Labs</p>
+        </div>
+
       </div>
     </AppContext.Provider>
   );
