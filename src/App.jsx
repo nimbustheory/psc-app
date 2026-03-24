@@ -1511,26 +1511,36 @@ export default function App() {
       <div style={{ position: "fixed", inset: 0, fontFamily: "'DM Sans', system-ui, sans-serif", background: "#fafafa", display: "flex", justifyContent: "center", alignItems: "center", overflow: "hidden" }}>
 
         {/* ——— LEFT PANEL ——— */}
-        <div className="demo-side-panel" style={{ width: 280, flexShrink: 0, paddingRight: 40, display: "flex", flexDirection: "column", justifyContent: "center", alignSelf: "center" }}>
-          <div style={{ marginBottom: 32 }}>
-            {GYM_CONFIG.logoImage && <img src={GYM_CONFIG.logoImage} alt={GYM_CONFIG.name} style={{ height: 48, objectFit: "contain", marginBottom: 16 }} />}
-            <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 28, color: T.bg, lineHeight: 1.1, marginBottom: 8 }}>{GYM_CONFIG.subtitle}</h1>
-            <p style={{ fontSize: 14, color: "#71717a", lineHeight: 1.5 }}>{GYM_CONFIG.description}</p>
+        <div className="demo-side-panel" style={{ width: 300, flexShrink: 0, paddingRight: 48, display: "flex", flexDirection: "column", justifyContent: "center", alignSelf: "center" }}>
+          <p style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em", color: T.accent, marginBottom: 16 }}>Prototype Demo</p>
+          <h1 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 42, color: T.bg, lineHeight: 1, marginBottom: 4 }}>{GYM_CONFIG.name}</h1>
+          <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, color: "#a1a1aa", letterSpacing: "0.05em", marginBottom: 4 }}>STRENGTH COLLECTIVE</p>
+          <p style={{ fontSize: 13, color: "#a1a1aa", marginBottom: 32 }}>CrossFit Gym App</p>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {[
+              { icon: Dumbbell, label: "Daily WODs", desc: "Rx & scaled with coach notes" },
+              { icon: Calendar, label: "Class Schedule", desc: "Reserve spots & check in" },
+              { icon: TrendingUp, label: "Progress Tracking", desc: "Log PRs, WODs & body stats" },
+              { icon: Trophy, label: "Leaderboards", desc: "Benchmarks & monthly challenges" },
+              { icon: Users, label: "Coach Profiles", desc: "Bios, certs & specialties" },
+              { icon: CreditCard, label: "Membership", desc: "Plans, pricing & billing" },
+              { icon: Award, label: "Competitions", desc: "In-house throwdowns & events" },
+              { icon: Bell, label: "Notifications", desc: "WOD alerts & PR celebrations" },
+            ].map((f, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: T.accentGhost, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <f.icon size={17} style={{ color: T.accent }} />
+                </div>
+                <div>
+                  <p style={{ fontSize: 14, fontWeight: 600, color: "#27272a", lineHeight: 1.2 }}>{f.label}</p>
+                  <p style={{ fontSize: 12, color: "#a1a1aa", lineHeight: 1.3 }}>{f.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 8, background: T.accentGhost, display: "flex", alignItems: "center", justifyContent: "center" }}><Dumbbell size={16} style={{ color: T.accent }} /></div>
-              <span style={{ fontSize: 13, color: "#52525b" }}>Functional Fitness Classes</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 8, background: T.accentGhost, display: "flex", alignItems: "center", justifyContent: "center" }}><Users size={16} style={{ color: T.accent }} /></div>
-              <span style={{ fontSize: 13, color: "#52525b" }}>Community Driven</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 32, height: 32, borderRadius: 8, background: T.accentGhost, display: "flex", alignItems: "center", justifyContent: "center" }}><Trophy size={16} style={{ color: T.accent }} /></div>
-              <span style={{ fontSize: 13, color: "#52525b" }}>Track PRs & Compete</span>
-            </div>
-          </div>
+
+          <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: "#d4d4d8", marginTop: 36 }}>Built by Nimbus Labs</p>
         </div>
 
         {/* ——— CENTER: Phone Mockup ——— */}
@@ -1593,27 +1603,42 @@ export default function App() {
         </div>
 
         {/* ——— RIGHT PANEL ——— */}
-        <div className="demo-side-panel" style={{ width: 280, flexShrink: 0, paddingLeft: 40, display: "flex", flexDirection: "column", justifyContent: "center", alignSelf: "center" }}>
+        <div className="demo-side-panel" style={{ width: 300, flexShrink: 0, paddingLeft: 48, display: "flex", flexDirection: "column", justifyContent: "center", alignSelf: "center", gap: 20 }}>
+          {/* Admin Dashboard CTA card */}
           <div style={{ background: "#fff", borderRadius: 16, padding: 24, boxShadow: "0 1px 3px rgba(0,0,0,.06)" }}>
-            <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", color: T.accent, marginBottom: 12 }}>Quick Info</p>
+            <div style={{ width: 40, height: 40, borderRadius: 12, background: T.accentGhost, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+              <Shield size={20} style={{ color: T.accent }} />
+            </div>
+            <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 20, color: T.bg, marginBottom: 8 }}>Admin Dashboard</h3>
+            <p style={{ fontSize: 13, color: "#71717a", lineHeight: 1.5, marginBottom: 16 }}>Click the <span style={{ color: T.accent, fontWeight: 600 }}>shield icon</span> in the header to toggle to the admin side of the app.</p>
+            <button onClick={() => { setIsAdmin(true); setPage("admin-dashboard"); }} style={{ width: "100%", padding: "10px 0", borderRadius: 10, border: "none", background: T.accent, color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+              <Shield size={16} /> Open Admin View
+            </button>
+          </div>
+
+          {/* Admin Features list */}
+          <div style={{ background: "#fff", borderRadius: 16, padding: 24, boxShadow: "0 1px 3px rgba(0,0,0,.06)" }}>
+            <h3 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: 18, color: T.bg, marginBottom: 16 }}>Admin Features</h3>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <div>
-                <p style={{ fontSize: 12, fontWeight: 600, color: "#27272a", marginBottom: 2 }}>Location</p>
-                <p style={{ fontSize: 13, color: "#71717a" }}>{GYM_CONFIG.address.street}</p>
-                <p style={{ fontSize: 13, color: "#71717a" }}>{GYM_CONFIG.address.city}, {GYM_CONFIG.address.state} {GYM_CONFIG.address.zip}</p>
-              </div>
-              <div>
-                <p style={{ fontSize: 12, fontWeight: 600, color: "#27272a", marginBottom: 2 }}>Contact</p>
-                <p style={{ fontSize: 13, color: "#71717a" }}>{GYM_CONFIG.phone}</p>
-                <p style={{ fontSize: 13, color: "#71717a" }}>{GYM_CONFIG.email}</p>
-              </div>
-              <div>
-                <p style={{ fontSize: 12, fontWeight: 600, color: "#27272a", marginBottom: 2 }}>Follow</p>
-                <p style={{ fontSize: 13, color: T.accent }}>{GYM_CONFIG.social.instagram}</p>
-              </div>
+              {[
+                { icon: LayoutDashboard, label: "Dashboard", desc: "Revenue, attendance & growth" },
+                { icon: Dumbbell, label: "WOD Builder", desc: "Create & publish workouts" },
+                { icon: Users, label: "Member CRM", desc: "Profiles, billing & check-ins" },
+                { icon: Megaphone, label: "Broadcast", desc: "Push, email & SMS campaigns" },
+                { icon: Settings, label: "Gym Settings", desc: "White-label configuration" },
+              ].map((f, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ width: 34, height: 34, borderRadius: 8, background: T.bgDim, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <f.icon size={16} style={{ color: "#71717a" }} />
+                  </div>
+                  <div>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: "#27272a", lineHeight: 1.2 }}>{f.label}</p>
+                    <p style={{ fontSize: 12, color: "#a1a1aa", lineHeight: 1.3 }}>{f.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <p style={{ fontSize: 11, color: "#a1a1aa", marginTop: 20, textAlign: "center" }}>Built by Nimbus Labs</p>
         </div>
 
       </div>
