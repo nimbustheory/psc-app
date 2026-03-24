@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portland Strength Collective — Member App</title>
+    <meta name="description" content="PSC Member Loyalty App — An inclusive functional fitness gym in SE Portland focused on building strength and community." />
+    <meta name="theme-color" content="#1a2a26" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+        background: #f0f4f3;
+        color: #18181b;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+      }
+      #root { min-height: 100vh; }
+      ::-webkit-scrollbar { width: 4px; height: 4px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 99px; }
+      input, textarea, button, select { font-family: inherit; }
+      img { max-width: 100%; display: block; }
+      button { -webkit-tap-highlight-color: transparent; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      .pb-6 > section { animation: fadeIn 0.35s ease-out both; }
+      .pb-6 > section:nth-child(2) { animation-delay: 0.05s; }
+      .pb-6 > section:nth-child(3) { animation-delay: 0.1s; }
+      .pb-6 > section:nth-child(4) { animation-delay: 0.15s; }
+      .pb-6 > section:nth-child(5) { animation-delay: 0.2s; }
+      .pb-6 > section:nth-child(6) { animation-delay: 0.25s; }
+      .pb-6 > section:nth-child(7) { animation-delay: 0.3s; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
